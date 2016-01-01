@@ -166,11 +166,11 @@ app.controller('plotTextController', ['$scope', '$timeout', '$http', function($s
 	    var e = evt.originalEvent; // get the javascript event
 	    console.log("original event:", e);
 	    if (e.message) { 
-	        //alert("Error:\n\t" + e.message + "\nLine:\n\t" + e.lineno + "\nFile:\n\t" + e.filename);
-	        $('#myModal2').modal('show');
+	        console.log("Error:\n\t" + e.message + "\nLine:\n\t" + e.lineno + "\nFile:\n\t" + e.filename);
+	        //$('#myModal2').modal('show');
 	    } else {
-	        //alert("Error:\n\t" + e.type + "\nElement:\n\t" + (e.srcElement || e.target));
-	        $('#myModal2').modal('show');
+	        console.log("Error:\n\t" + e.type + "\nElement:\n\t" + (e.srcElement || e.target));
+	        //$('#myModal2').modal('show');
 	    }
 	});
 
