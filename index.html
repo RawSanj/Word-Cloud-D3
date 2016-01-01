@@ -29,7 +29,6 @@
                 Angular-D3.Js Word Cloud
               </h2><br>
               <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
                 <div id="charts">
                   <div class="row">
                     <div class="col-md-6 col-lg-6">
@@ -87,45 +86,54 @@
                   <div id="chart"></div>
                 </div>
               </div>
+              <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+                <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" style="border-style: solid;border-width: 2px;border-radius: 6px;border-color: #4cae4c;">
+                  <div class="text-center"> 
+                    {{alert.msg}} <br>
+                    <strong>
+                      Drag and Scroll to Zoom In - Zoom out.
+                    </strong>
+                  </div>
+                </uib-alert>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <footer id="footer">
-
-      <div class="row">
-        <div class="col-md-offset-1 col-lg-offset-1 col-md-10 col-lg-10">
-           <!-- Button trigger modal -->
-            <a href="/#" class="text-center" data-toggle="modal" data-target="#about">
-              About
-            </a>
-            <!-- Error Modal -->
-            <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title text-center" id="myModalLabel">
-                      <span class="glyphicon glyphicon-info-sign"></span>
-                      About
-                    </h4>
-                  </div>
-                  <div class="modal-body"><br>
-                    Create Word Cloud from data in the attached Text File.<br><br>
-                    Example used - <a href="http://bl.ocks.org/ericcoopey/6382449" target="_blank">D3 Word Cloud implementation</a>
-                    <br> <br> 
-                  </div>
-                  <div class="modal-footer">
-                    More Projects on Github - 
-                    <a href="https://github.com/RawSanj" target="_blank">@RawSanj</a>
+        <div class="row">
+          <div class="col-md-offset-1 col-lg-offset-1 col-md-10 col-lg-10">
+             <!-- Button trigger modal -->
+              <a href="/#" class="text-center" data-toggle="modal" data-target="#about">
+                About
+              </a>
+              <!-- Error Modal -->
+              <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title text-center" id="myModalLabel">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        About
+                      </h4>
+                    </div>
+                    <div class="modal-body"><br>
+                      Create Word Cloud from data in the attached Text File.<br>
+                      Drag the chart to move to center and use Mouse Scroll to Zoom In/Zoom out.<br>
+                      Example used - <a href="http://bl.ocks.org/ericcoopey/6382449" target="_blank">D3 Word Cloud implementation</a>
+                      <br> <br> 
+                    </div>
+                    <div class="modal-footer">
+                      More Projects on Github - 
+                      <a href="https://github.com/RawSanj" target="_blank">@RawSanj</a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-           <a href="https://github.com/RawSanj/Word-Cloud-D3" class="pull-right"><em>Fork Me on Github.</em></a>
-        </div>  
-      </div>
-       
+             <a href="https://github.com/RawSanj/Word-Cloud-D3" class="pull-right"><em>Fork Me on Github.</em></a>
+          </div>  
+        </div>
       </footer>
     </div>
 

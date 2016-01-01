@@ -113,10 +113,14 @@ div.tooltip {
 text {
 	cursor: pointer;
 }
-#charts{
+/*#charts{
 	border-style: solid;
 	border-width: 1px;
 	padding: 20px;
 	border-radius: 6px;
 	border-color: #4cae4c;
+}*/
+.overlay {
+  fill: none;
+  pointer-events: all;
 }

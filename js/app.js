@@ -11,6 +11,9 @@ app.controller('plotTextController', ['$scope', '$timeout', '$http', function($s
 
     //Alerts
 	$scope.alerts = [];
+	$scope.closeAlert = function(index) {
+	    $scope.alerts.splice(index, 1);
+	};
 
     $scope.dataSet = [{size : 160, text : "Java"},{size : 80, text : "HTML"},{size : 50, text : "CSS"},{size : 90, text : "JavaScript"},{size : 100, text : "C++"},{size : 80, text : ".Net"},{size : 70, text : "C#"},{size : 20, text : "Scala"},{size : 180, text : "Spring"},{size : 50, text : "Clojure"},{size : 160, text : "Python"},{size : 30, text : "Ruby"},{size : 50, text : "Rails"},{size : 160, text : "AngularJs"},{size : 80, text : "EmberJs"},{size : 160, text : "D3.js"},{size : 140, text : "Hibernate"},{size : 120, text : "MongoDb"},{size : 100, text : "MySql"},{size : 170, text : "Node.Js"},{size : 110, text : "Polymer"},{size : 10,text : "AppleScript"},{size : 20,text : "Bash"},{size : 80,text : "CoffeeScript"},{size : 70,text : "Cobra"},{size : 120,text : "Erlang"},{size : 140,text : "ECMAScript"},{size : 100,text : "Fortran"},{size : 120,text : "GoLang"},{size : 160,text : "Groovy"},{size : 60,text : "Haskell"},{size : 30,text : "Jython"},{size : 10,text : "KRYPTON"},{size : 10,text : "LotusScript"},{size : 90,text : "MATLAB"},{size : 100,text : "NoSql"},{size : 110,text : "Pearl"},{size : 20,text : "PowerShell"},{size : 30,text : "SciLab"},{size : 70,text : "VBScript"},{size : 160,text : "Php"},{size : 120,text : "Sql"}, {size : 40, text : "ASP.NET"},{size : 60, text : "ASP.NET MVC"},{size : 20, text : "ASP.NET Razor"},{size : 20, text : "ASP.NET vNext"},{size : 70, text : "COBOL on Wheelchair"},{size : 50, text : "Apache Cocoon"},{size : 20, text : "ColdFusion on Wheels"},{size : 20, text : "ColdSpring Framework"},{size : 20, text : "Cotonti"},{size : 20, text : "Dancer (software)"},{size : 80, text : "Django (web framework)"},{size : 20, text : "Fluid UI"},{size : 20, text : "FuelPHP"},{size : 80, text : "Google Apps Script"},{size : 90, text : "Grails (framework)"},{size : 20, text : "Jamroom"},{size : 100, text : "Java Platform"},{size : 80, text : "JavaServer Faces"},{size : 50, text : "Javeline platform"},{size : 20, text : "JBND"},{size : 70, text : "JBoss Seam"},{size : 20, text : "JHipster"},{size : 90, text : "Joomla"},{size : 70, text : "JQuery Mobile"},{size : 20, text : "Jspx-bay"},{size : 20, text : "JVx (Framework)"},{size : 30, text : "JWt (Java web toolkit)"},{size : 50, text : "Laravel"},{size : 20, text : "Lift (web framework)"},{size : 70, text : "Lithium (PHP framework)"},{size : 100, text : "MEAN"},{size : 20, text : "Moobile.js"},{size : 20, text : "Mozilla Skywriter"},{size : 20, text : "SilverStripe"},{size : 30, text : "Sinatra (software)"},{size : 20, text : "SISCWeb"},{size : 40, text : "SiteMesh"},{size : 20, text : "Slimweb"},{size : 20, text : "Snap (web framework)"},{size : 20, text : "Solution stack"},{size : 60, text : "Spark (software)"},{size : 40, text : "Spring Framework"},{size : 70, text : "Spring Roo"},{size : 20, text : "Stripes (framework)"},{size : 90, text : "Apache Struts"},{size : 100, text : "Apache Struts 2"},{size : 70, text : "Sun Web Developer Pack"},{size : 60, text : "SymbolicWeb"},{size : 90, text : "Vaadin"},{size : 20, text : "Vibe.d"},{size : 70, text : "VRaptor"}];
 	drawChart($scope.dataSet);
@@ -121,11 +124,17 @@ app.controller('plotTextController', ['$scope', '$timeout', '$http', function($s
 	                .attr("width", width)
 	                .attr("height", height)
 	                .attr("class", "wordcloud")
-	        var g = chart.append("g")
-	                // without the transform, words words would get cutoff to the left and top, they would
-	                // appear outside of the SVG area
-	             //   .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
-	                .attr("transform", "translate(380,250)")
+	          		.append("g")
+			    	.call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
+			  		.append("g");
+
+				chart.append("rect")
+				    .attr("class", "overlay")
+				    .attr("width", width+50)
+				    .attr("height", height+50)
+				    .attr("transform", "translate(-360,-250)");
+
+	           	chart.attr("transform", "translate(360,250)")
 	                .selectAll("text")
 	                .data(words)
 	                .enter().append("text")
@@ -139,7 +148,7 @@ app.controller('plotTextController', ['$scope', '$timeout', '$http', function($s
 			            div.transition()		
 			                .duration(400)		
 			                .style("opacity", .9);		
-			            div	.html("<span style='line-height: 25px;'>" + "<i>Wors : </i>'"+ d.text +"'<br><em>Count :  </em><strong>"  + d.size + "</strong></span>")	
+			            div	.html("<span style='line-height: 25px;'>" + "<i>Word : </i>'"+ d.text +"'<br><em>Count :  </em><strong>"  + d.size + "</strong></span>")	
 			                .style("left", (d3.event.pageX) + "px")		
 			                .style("top", (d3.event.pageY - 28) + "px");	
 			            })					
@@ -149,29 +158,15 @@ app.controller('plotTextController', ['$scope', '$timeout', '$http', function($s
 			                .style("opacity", 0);	
 			        });
 
-			// function zoom() {
-			// 	g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-			// }
+			function zoom() {
+				chart.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+			}
 	    };
 	    $scope.alerts.push({ type: 'success', msg: 'Word Cloud created successfully!'});
+
 	    $timeout(function() {
 			$scope.alerts.pop();
-		}, 1500);
+		}, 5000);
 	};
-
-	//for any other error	
-	$(window).on("error", function(evt) {
-
-	    console.log("jQuery error event:", evt);
-	    var e = evt.originalEvent; // get the javascript event
-	    console.log("original event:", e);
-	    if (e.message) { 
-	        console.log("Error:\n\t" + e.message + "\nLine:\n\t" + e.lineno + "\nFile:\n\t" + e.filename);
-	        //$('#myModal2').modal('show');
-	    } else {
-	        console.log("Error:\n\t" + e.type + "\nElement:\n\t" + (e.srcElement || e.target));
-	        //$('#myModal2').modal('show');
-	    }
-	});
 
 }]);
