@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="plotText">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=10">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AngularJs | D3.JS</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+  </head>
+  <body ng-cloak>
+    <!-- Show this error if JavaSCript, jQuery and AngularJS is disabled -->
+    <div id="hideIfJS" style="text-align:center;"><br><br><br><br><br><br>
+      <h4>
+        <strong>Error: </strong> Looks like either the JavaScript is disabled in your browser or you don't have access to external JavaScript Libraries.<br><br>
+      </h4>
+      <h5>
+        Please Contact your System Administrator to enable access to JavaScript External.
+      <h5>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <!-- Hide all if JavaSCript, jQuery and AngularJS is disabled -->
+    <div id="hideIfNoJS" class="hidden">
+      <div ng-controller="plotTextController" id="holder">
+        <div class="container-fluid" id="body">
+          <div class="row">
+            <div class="col-md-12"> <br>
+              <h2 class="text-center text-success" style="margin-bottom : 0px;">
+                Angular-D3.Js Word Cloud
+              </h2><br>
+              <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+                <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+                <div id="charts">
+                  <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                      <input type="file" id="textFiles" name="files" class="filestyle" data-buttonName="btn-info">
+                    </div>  
+                    <div class="col-md-6 col-lg-6">
+                      <button data-ng-click="triggerDrawChart()" class="btn btn-warning btn-block">Create Word Cloud Attached File</button>
+                   </div>  
+                </div>
+                  <!-- Confirmation Modal -->
+                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title text-center" id="myModalLabel">
+                            <span class="glyphicon glyphicon-warning-sign"></span>
+                            Confirmation
+                          </h4>
+                        </div>
+                        <div class="modal-body text-center"><br>
+                          <span class="glyphicon glyphicon-info-sign"></span>
+                          Depending upon the file size, this might take a while. <br>
+                          Please wait until the processing to complete!<br><br>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancel</button>
+                          <button type="button" class="btn btn-warning" data-ng-click="drawChart()">Yes, Continue</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Error Modal -->
+                  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title text-center" id="myModalLabel">
+                            <span class="glyphicon glyphicon-warning-sign"></span>
+                            Error
+                            </h4>
+                        </div>
+                        <div class="modal-body text-center"><br>
+                          <span class="glyphicon glyphicon-info-sign"></span> 
+                          UnSupported File Type. <br>
+                          Please select a valid text file. <br> <br>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="chart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+
+      <div class="row">
+        <div class="col-md-offset-1 col-lg-offset-1 col-md-10 col-lg-10">
+           <!-- Button trigger modal -->
+            <a href="/#" class="text-center" data-toggle="modal" data-target="#about">
+              About
+            </a>
+            <!-- Error Modal -->
+            <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="myModalLabel">
+                      <span class="glyphicon glyphicon-info-sign"></span>
+                      About
+                    </h4>
+                  </div>
+                  <div class="modal-body"><br>
+                    Create Word Cloud from data in the attached Text File.<br><br>
+                    Example used - <a href="http://bl.ocks.org/ericcoopey/6382449" target="_blank">D3 Word Cloud implementation</a>
+                    <br> <br> 
+                  </div>
+                  <div class="modal-footer">
+                    More Projects on Github - 
+                    <a href="https://github.com/RawSanj" target="_blank">@RawSanj</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+           <a href="https://github.com/RawSanj/Word-Cloud-D3" class="pull-right"><em>Fork Me on Github.</em></a>
+        </div>  
+      </div>
+       
+      </footer>
+    </div>
+
+    <!-- JQuery js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap.filestyle/1.1.0/js/bootstrap-filestyle.min.js"></script>
+    <!-- BootStrap Js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- D3Js -->
+    <script src="http://d3js.org/d3.v2.js"></script>
+    <!-- JS Libraries for Angulat.UI and Angular-Main-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>    
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.0.js"></script>
+    <!-- App Js script -->
+    <script src="js/app.js"></script>
+    <script src="js/d3.layout.cloud.js"></script>
+  </body>
+</html>
