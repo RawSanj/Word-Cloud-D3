@@ -125,13 +125,14 @@ app.controller('plotTextController', ['$scope', '$timeout', '$http', function($s
 	                .attr("height", height)
 	                .attr("class", "wordcloud")
 	          		.append("g")
-			    	.call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
+			    	.call(d3.behavior.zoom().scaleExtent([0.5, 10]).on("zoom", zoom))
 			  		.append("g");
 
 				chart.append("rect")
 				    .attr("class", "overlay")
 				    .attr("width", width+50)
 				    .attr("height", height+50)
+				    .attr("fill", "none")
 				    .attr("transform", "translate(-360,-250)");
 
 	           	chart.attr("transform", "translate(360,250)")
@@ -162,11 +163,22 @@ app.controller('plotTextController', ['$scope', '$timeout', '$http', function($s
 				chart.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 			}
 	    };
-	    $scope.alerts.push({ type: 'success', msg: 'Word Cloud created successfully!'});
+	    $scope.alerts.push({ type: 'success', msg: 'Success! Drag and Scroll to Zoom In - Zoom out.'});
 
 	    $timeout(function() {
 			$scope.alerts.pop();
 		}, 5000);
 	};
+
+	$scope.downloadSvg = function () {
+		var e = document.createElement('script'); 
+	    if (window.location.protocol === 'https:') { 
+	        e.setAttribute('src', 'https://rawgit.com/NYTimes/svg-crowbar/gh-pages/svg-crowbar.js'); 
+	    } else { 
+	        e.setAttribute('src', 'http://nytimes.github.com/svg-crowbar/svg-crowbar.js'); 
+	    } 
+	    e.setAttribute('class', 'svg-crowbar'); 
+	    document.body.appendChild(e); 
+	}
 
 }]);

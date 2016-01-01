@@ -1,7 +1,11 @@
 /* Main WebPage CSS*/
 
-body{
-	font-family: verdana;
+body {
+    font-family:"Lucida Grande","Droid Sans",Arial,Helvetica,sans-serif;
+    background-color: rgba(255, 127, 14, 0.15);
+    border-style: solid;
+	border-width: 1px;
+	border-color: rgba(240, 173, 78, 0.7);
 }
 input[placeholder]{
     text-align:center;
@@ -9,49 +13,15 @@ input[placeholder]{
 textarea[placeholder]{
     text-align:center;
 }
-table{
-	font-size: 12px;
-	background-color: rgba(255,255,255,0.8);
-}
-.table-css{
-	border-style: solid;
-	border-radius: 10px !important;
-	border-width: 1px !important;
-	border-color: #faebcc;
-}
-th a{
-	text-decoration: none;
-	color: rgba(255,0,0,0.6);
-}
-th a:hover{
-	text-decoration: none;
-	color: rgba(255,0,0,0.8);
-}
-td{
-	text-align: left !important;
-	padding-left: 15px !important;
-}
-th{
-	text-align: left !important;
-	padding-left: 10px !important;
-	padding-top: 12px !important;
-	padding-bottom: 12px !important;
-}
-td a{
-	text-decoration: none;
-	color: rgba(255,0,0,0.8);
-}
-td a:hover{
-	text-decoration: none;
-	color: rgba(255,0,0,1);
-}
 footer {
-    position: fixed;
     bottom: 0;
     width: 100%;
     padding: 12px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(240, 173, 78, 0.45);
     font-size: 16px;
+    border-style: solid;
+	border-width: 1px;
+	border-color: rgba(240, 173, 78, 0.7);
 }
 footer a{
 	text-decoration: none;
@@ -63,27 +33,25 @@ html,body{
     height: 100% !important;
 }
 
-#holder {
-    min-height: 100% !important;
-    position:relative !important;
+#charts{
+	border-style: solid;
+	border-width: 1px;
+	padding: 20px;
+	border-radius: 6px;
+	border-color: #4cae4c;
+	width: 1000px;
+	height: 620px;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #4cae4c;
+    margin: 1em 0;
+    padding: 0; 
 }
 
-#body {
-    padding-bottom: 100px !important;
-    min-height: 800px !important;
-}
-
-#footer{
-    bottom: 0 !important;
-    height: 50px;
-    left: 0;
-    position: absolute !important;
-    right: 0;
-}
-
-body {
-    font-family:"Lucida Grande","Droid Sans",Arial,Helvetica,sans-serif;
-}
+/*Word Cloud Css*/
 .legend {
     border: 1px solid #555555;
     border-radius: 5px 5px 5px 5px;
@@ -113,13 +81,6 @@ div.tooltip {
 text {
 	cursor: pointer;
 }
-/*#charts{
-	border-style: solid;
-	border-width: 1px;
-	padding: 20px;
-	border-radius: 6px;
-	border-color: #4cae4c;
-}*/
 .overlay {
   fill: none;
   pointer-events: all;

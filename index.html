@@ -21,23 +21,34 @@
     </div>
     <!-- Hide all if JavaSCript, jQuery and AngularJS is disabled -->
     <div id="hideIfNoJS" class="hidden">
-      <div ng-controller="plotTextController" id="holder">
-        <div class="container-fluid" id="body">
+      <div ng-controller="plotTextController" class="main">
+        <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12"> <br>
-              <h2 class="text-center text-success" style="margin-bottom : 0px;">
+            <div class="col-md-12">
+              <h2 class="text-center text-warning" style="margin-bottom : 0px; color:rgb(255, 127, 14)">
+                <strong></strong>
                 Angular-D3.Js Word Cloud
               </h2><br>
               <div class="col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
                 <div id="charts">
                   <div class="row">
-                    <div class="col-md-6 col-lg-6">
-                      <input type="file" id="textFiles" name="files" class="filestyle" data-buttonName="btn-info">
-                    </div>  
-                    <div class="col-md-6 col-lg-6">
-                      <button data-ng-click="triggerDrawChart()" class="btn btn-warning btn-block">Create Word Cloud Attached File</button>
-                   </div>  
-                </div>
+                      <div class="col-md-4 col-lg-4">
+                        <input type="file" id="textFiles" name="files" class="filestyle" data-buttonName="btn-info">
+                      </div>  
+                      <div class="col-md-4 col-lg-4">
+                        <button data-ng-click="triggerDrawChart()" class="btn btn-warning btn-block">
+                          <span class="glyphicon glyphicon-play-circle"></span> 
+                           Create Word Cloud Attached File
+                        </button>
+                     </div>
+                     <div class="col-md-4 col-lg-4">
+                        <button type="button" class="btn btn-success btn-block" ng-click="downloadSvg()">
+                          <span class="glyphicon glyphicon-download-alt"></span> 
+                           Download SVG
+                        </button>
+                     </div>    
+                  </div>
+                  <hr>
                   <!-- Confirmation Modal -->
                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -87,11 +98,11 @@
                 </div>
               </div>
               <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
-                <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" style="border-style: solid;border-width: 2px;border-radius: 6px;border-color: #4cae4c;">
+                <br>
+                <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" style="border-style: solid;border-width: 1px;border-radius: 6px;border-color: #4cae4c;">
                   <div class="text-center"> 
-                    {{alert.msg}} <br>
                     <strong>
-                      Drag and Scroll to Zoom In - Zoom out.
+                      {{alert.msg}}
                     </strong>
                   </div>
                 </uib-alert>
@@ -100,7 +111,7 @@
           </div>
         </div>
       </div>
-      <footer id="footer">
+      <footer>
         <div class="row">
           <div class="col-md-offset-1 col-lg-offset-1 col-md-10 col-lg-10">
              <!-- Button trigger modal -->
@@ -118,11 +129,11 @@
                         About
                       </h4>
                     </div>
-                    <div class="modal-body"><br>
-                      Create Word Cloud from data in the attached Text File.<br>
-                      Drag the chart to move to center and use Mouse Scroll to Zoom In/Zoom out.<br>
-                      Example used - <a href="http://bl.ocks.org/ericcoopey/6382449" target="_blank">D3 Word Cloud implementation</a>
-                      <br> <br> 
+                    <div class="modal-body">
+                      <li>Create Word Cloud from data in the attached Text File.</li>
+                      <li>Drag the chart to move to center and use Mouse Scroll to Zoom In/Zoom out.</li>
+                      <li>Download generated SVG.</li>
+                      <li>Example used - <a href="http://bl.ocks.org/ericcoopey/6382449" target="_blank">D3 Word Cloud implementation</a></li>
                     </div>
                     <div class="modal-footer">
                       More Projects on Github - 
@@ -131,7 +142,7 @@
                   </div>
                 </div>
               </div>
-             <a href="https://github.com/RawSanj/Word-Cloud-D3" class="pull-right"><em>Fork Me on Github.</em></a>
+             <a href="https://github.com/RawSanj/Word-Cloud-D3" class="pull-right">Fork Me on Github</a>
           </div>  
         </div>
       </footer>
